@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Look! I can code node now.");
@@ -19,6 +20,12 @@ const users = [
 ];
 app.get("/users", (req, res) => {
   res.send(users);
+});
+
+app.post("/user", (req, res) => {
+  const user = req.body;
+  users.push(user);
+  res.send(user);
 });
 
 app.listen(port, () => {
