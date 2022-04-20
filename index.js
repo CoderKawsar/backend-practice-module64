@@ -16,10 +16,19 @@ const users = [
   { id: 3, name: "Mr. Z", email: "c@d.com", mobile: "01788213643" },
   { id: 4, name: "Mr. A", email: "d@e.com", mobile: "01788213644" },
   { id: 5, name: "Mr. B", email: "e@f.com", mobile: "01788213645" },
+  { id: 7, name: "Mr. BX", email: "e@f.com", mobile: "01788213645" },
   { id: 6, name: "Mr. C", email: "f@g.com", mobile: "01788213646" },
 ];
 app.get("/users", (req, res) => {
-  res.send(users);
+  if (req.query.name) {
+    const searchQuery = req.query.name.toLowerCase();
+    const matched = users.filter((user) =>
+      user.name.toLowerCase().includes(searchQuery)
+    );
+    res.send(matched);
+  } else {
+    res.send(users);
+  }
 });
 
 app.get("/user/:id", (req, res) => {
