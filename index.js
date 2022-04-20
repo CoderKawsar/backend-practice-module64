@@ -22,6 +22,13 @@ app.get("/users", (req, res) => {
   res.send(users);
 });
 
+app.get("/user/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  console.log(id);
+  const user = users.find((user) => user.id === id);
+  res.send(user);
+});
+
 app.post("/user", (req, res) => {
   const user = req.body;
   users.push(user);
